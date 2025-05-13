@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 
-import { fetchMovies } from "../../services/movieService";
-import { Movie, MoviesResponse } from "../../types/movie";
+import { fetchMovies, MoviesResponse } from "../../services/movieService";
+import { Movie } from "../../types/movie";
 
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
@@ -29,13 +29,19 @@ const App = () => {
     queryKey: ["movies", query, page],
     queryFn: () => fetchMovies(query, page),
     enabled: !!query,
-    keepPreviousData: true,  // Это свойство должно работать после обновления библиотеки
+    keepPreviousData: true,
     staleTime: 5000,
+    placeholderData: {
+      page: 1,
+      total_results: 0,
+      total_pages: 0,
+      results: [],
+    },
   });
 
   useEffect(() => {
-    if (data && data.results.length === 0 && !isFetching && query.trim()) {
-      toast("Фільми не знайдено.");
+    if (data?.results?.length === 0 && !isFetching && query.trim()) {
+      toast.error("Фільми не знайдено.");
     }
   }, [data, isFetching, query]);
 
@@ -52,7 +58,7 @@ const App = () => {
     setSelectedMovie(null);
   };
 
-  const handlePageChange = (selectedItem: { selected: number }): void => {
+  const handlePageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);
   };
 
@@ -63,9 +69,15 @@ const App = () => {
       {isLoading && <Loader />}
       {isError && <ErrorMessage message={(error as Error).message} />}
 
-      {data && <MovieGrid movies={data.results} onSelect={handleSelect} />}
+      {data?.results?.length ? (
+        <MovieGrid movies={data.results} onSelect={handleSelect} />
+      ) : (
+        !isLoading &&
+        !isError &&
+        query.trim() && <ErrorMessage message="Фільми не знайдено." />
+      )}
 
-      {data && data.total_pages > 1 && (
+      {data?.total_pages && data.total_pages > 1 && (
         <ReactPaginate
           pageCount={data.total_pages}
           pageRangeDisplayed={5}

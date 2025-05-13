@@ -18,9 +18,11 @@ export const fetchMovies = async (
 ): Promise<MoviesResponse> => {
   const response = await axios.get<MoviesResponse>(BASE_URL, {
     params: {
-      api_key: API_KEY,
       query,
       page,
+    },
+    headers: {
+      Authorization: `Bearer ${API_KEY}`, // Используем Bearer токен
     },
   });
 
