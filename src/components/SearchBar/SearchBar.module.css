@@ -1,7 +1,7 @@
 .header {
     padding: 20px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
+    background-color: #fab906;
+    border-bottom: 1px solid #ee2121;
     margin-bottom: 20px;
 }
 
@@ -37,7 +37,7 @@
 .input {
     padding: 10px 12px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #ce3838;
     border-radius: 4px;
     width: 240px;
 }
