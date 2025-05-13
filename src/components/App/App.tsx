@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 
 import { fetchMovies } from "../../services/movieService";
-import { Movie } from "../../types/movie";
+import { Movie, MoviesResponse } from "../../types/movie";
 
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
@@ -14,22 +14,10 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 import css from "./App.module.css";
 
-const getMovies = ({ queryKey }: { queryKey: [string, string, number] }) => {
-  const [, query, page] = queryKey;
-  return fetchMovies(query, page);  // Використовуємо fetchMovies
-};
-
 const App = () => {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-
-  const placeholder = {
-    results: [],
-    total_pages: 0,
-    total_results: 0,
-    page: 1,
-  };
 
   const {
     data,
@@ -37,11 +25,11 @@ const App = () => {
     isError,
     error,
     isFetching,
-  } = useQuery({
+  } = useQuery<MoviesResponse>({
     queryKey: ["movies", query, page],
     queryFn: () => fetchMovies(query, page),
     enabled: !!query,
-    placeholderData: placeholder,
+    keepPreviousData: true,  // Это свойство должно работать после обновления библиотеки
     staleTime: 5000,
   });
 

@@ -1,9 +1,9 @@
+// src/services/movieService.ts
 import axios from "axios";
-import { Movie } from "../types/movie"; // імпортуй тип Movie
+import { Movie } from "../types/movie";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3/search/movie";
-
 
 export interface MoviesResponse {
   page: number;
@@ -16,7 +16,7 @@ export const fetchMovies = async (
   query: string,
   page = 1
 ): Promise<MoviesResponse> => {
-  const response = await axios.get(BASE_URL, {
+  const response = await axios.get<MoviesResponse>(BASE_URL, {
     params: {
       api_key: API_KEY,
       query,
