@@ -3,6 +3,7 @@ import axios from "axios";
 import { Movie } from "../types/movie";
 
 const API_KEY = import.meta.env.VITE_TMDB_TOKEN;
+const ALT_API_KEY = import.meta.env.VITE_TMDB_ALT_TOKEN;
 const BASE_URL = "https://api.themoviedb.org/3/search/movie";
 
 export interface MoviesResponse {

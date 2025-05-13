@@ -18,10 +18,10 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps): JSX.Ele
           role="button"
         >
           <img
-            src={
-              movie.poster_path
-                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                : "https://via.placeholder.com/500x750?text=No+Image"
+         src={
+           movie.poster_path
+             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+             : "https://placekitten.com/500/750" // Другой сервис заглушек
             }
             alt={movie.title}
             className={styles.image}
