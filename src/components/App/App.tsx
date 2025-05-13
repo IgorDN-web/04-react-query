@@ -40,7 +40,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    if (data?.results?.length === 0 && !isFetching && query.trim()) {
+    if ((data as MoviesResponse)?.results?.length === 0 && !isFetching && query.trim()) {
       toast.error("Фільми не знайдено.");
     }
   }, [data, isFetching, query]);
