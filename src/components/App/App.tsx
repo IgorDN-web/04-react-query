@@ -54,14 +54,31 @@ const App = () => {
 
   const handlePageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const showPagination = data?.total_pages && data.total_pages > 1;
+
   return (
-    <div className={css.container}>
+    <main className={css.wrapper}>
       <SearchBar onSubmit={handleSearch} />
 
       {isLoading && <Loader />}
       {isError && <ErrorMessage message={(error as Error).message} />}
+
+      {showPagination && (
+        <ReactPaginate
+          pageCount={data.total_pages}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={1}
+          onPageChange={handlePageChange}
+          forcePage={page - 1}
+          containerClassName={css.pagination}
+          activeClassName={css.active}
+          nextLabel="→"
+          previousLabel="←"
+        />
+      )}
 
       {data?.results?.length ? (
         <MovieGrid movies={data.results} onSelect={handleSelect} />
@@ -71,7 +88,7 @@ const App = () => {
         query.trim() && <ErrorMessage message="Фільми не знайдено." />
       )}
 
-      {data?.total_pages && data.total_pages > 1 && (
+      {showPagination && (
         <ReactPaginate
           pageCount={data.total_pages}
           pageRangeDisplayed={5}
@@ -88,7 +105,7 @@ const App = () => {
       {selectedMovie && (
         <MovieModal movie={selectedMovie} onClose={handleCloseModal} />
       )}
-    </div>
+    </main>
   );
 };
 

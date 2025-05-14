@@ -1,5 +1,28 @@
-/* src/index.css */
+:root {
+    --bg-header: #fab906;
+    --border-color: #ce3838;
+    --accent: #0a66c2;
+    --accent-dark: #004182;
+    --text-color: #000;
+    --input-bg: #fff;
+}
+
+body[data-theme="dark"] {
+    --bg-header: #1c1c1c;
+    --border-color: #333;
+    --accent: #f39c12;
+    --accent-dark: #d35400;
+    --text-color: #fff;
+    --input-bg: #2c2c2c;
+}
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+
+    background-image: url('/public/solen-feyissa-u8K7iXpgY9I-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: #fff;
 }

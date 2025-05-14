@@ -1,60 +1,34 @@
-.app {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #08b6eb;
-    display: flex;
-    flex-direction: column;
+.wrapper {
+    padding: 0 16px;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
-/* Добавь отступ после хедера */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.searchContainer {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    max-width: 400px;
-    margin-left: auto;
-}
-
-/* Пагинация */
 .pagination {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 6px;
-    margin: 16px 0;
+    gap: 8px;
+    padding: 20px 0;
     list-style: none;
-    padding: 0;
 }
 
 .pagination li {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #db0b0b;
     cursor: pointer;
+    padding: 8px 12px;
+    background-color: #333;
     border-radius: 4px;
-}
-
-.pagination a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
-
-.active {
-    background-color: #0a66c2;
-    color: rgb(134, 255, 249);
+    color: #fff;
     font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.pagination li:hover {
+    background-color: #555;
+}
+
+.pagination .selected,
+.pagination .active {
+    background-color: #fab906;
+    color: #000;
 }
